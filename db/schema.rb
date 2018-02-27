@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227134421) do
+ActiveRecord::Schema.define(version: 20180227142319) do
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
 
   create_table "footprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "before"
@@ -32,6 +40,23 @@ ActiveRecord::Schema.define(version: 20180227134421) do
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_regions_on_ancestry"
+  end
+
+  create_table "shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "desc"
+    t.integer "cocomments_count"
+    t.bigint "category_id"
+    t.bigint "region_id"
+    t.string "address"
+    t.string "logo"
+    t.decimal "rank", precision: 2, scale: 1
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lng", precision: 10, scale: 6
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_shops_on_category_id"
+    t.index ["region_id"], name: "index_shops_on_region_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -63,4 +88,6 @@ ActiveRecord::Schema.define(version: 20180227134421) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "shops", "categories"
+  add_foreign_key "shops", "regions"
 end
