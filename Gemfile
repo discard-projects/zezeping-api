@@ -32,6 +32,8 @@ gem 'omniauth-facebook'
 gem 'timequery', github: 'wuyuedefeng/timequery'
 gem 'footprintable', github: 'wuyuedefeng/footprintable'
 gem 'base_resource', github: 'wuyuedefeng/base-resource'
+# tree
+gem 'ancestry'
 
 
 group :development, :test do
