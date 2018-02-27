@@ -24,7 +24,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
+# auth
 gem 'devise_token_auth'
+# facebook part auth
+gem 'omniauth-facebook'
+
 gem 'timequery', github: 'wuyuedefeng/timequery'
 gem 'footprintable', github: 'wuyuedefeng/footprintable'
 gem 'base_resource', github: 'wuyuedefeng/base-resource'
