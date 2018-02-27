@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  shop: one
+  content: MyString
+  rank: 9.99
+  per_expense: 1
+
+two:
+  user: two
+  shop: two
+  content: MyString
+  rank: 9.99
+  per_expense: 1

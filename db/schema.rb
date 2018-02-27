@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227143846) do
+ActiveRecord::Schema.define(version: 20180227144755) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(version: 20180227143846) do
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "shop_id"
+    t.string "content"
+    t.decimal "rank", precision: 2, scale: 1
+    t.string "rank_detail"
+    t.integer "per_expense", default: 0
+    t.string "attachments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_comments_on_shop_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "footprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -59,6 +73,8 @@ ActiveRecord::Schema.define(version: 20180227143846) do
     t.string "address"
     t.string "logo"
     t.decimal "rank", precision: 2, scale: 1
+    t.string "rank_detail"
+    t.integer "per_expense", default: 0
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
     t.datetime "created_at", null: false
@@ -96,6 +112,8 @@ ActiveRecord::Schema.define(version: 20180227143846) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "shops"
+  add_foreign_key "comments", "users"
   add_foreign_key "shop_details", "shops"
   add_foreign_key "shops", "categories"
   add_foreign_key "shops", "regions"

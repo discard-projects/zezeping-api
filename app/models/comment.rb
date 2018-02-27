@@ -1,12 +1,12 @@
-class Shop < ApplicationRecord
+class Comment < ApplicationRecord
 
   store :rank_detail, :accessors => [:rank_taste, :rank_env, :rank_service]
   after_initialize :initialize_defaults, :if => :new_record?
 
-  belongs_to :category
-  belongs_to :region
-  has_one :shop_detail
-  has_many :comments
+  serialize :attachments, Array
+
+  belongs_to :user
+  belongs_to :shop
 
   private
 
