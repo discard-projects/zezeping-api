@@ -3,7 +3,8 @@ class CreateShops < ActiveRecord::Migration[5.1]
     create_table :shops do |t|
       t.string :name
       t.string :desc
-      t.integer :cocomments_count
+      t.integer :status, default: 0
+      t.integer :comments_count, default: 0
       t.references :category, foreign_key: true
       t.references :region, foreign_key: true
       t.string :address

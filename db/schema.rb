@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.decimal "rank", precision: 2, scale: 1
     t.string "rank_detail"
     t.integer "per_expense", default: 0
-    t.string "attachments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_comments_on_shop_id"
@@ -73,7 +72,8 @@ ActiveRecord::Schema.define(version: 20180228042748) do
   create_table "shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "desc"
-    t.integer "cocomments_count"
+    t.integer "status", default: 0
+    t.integer "comments_count", default: 0
     t.bigint "category_id"
     t.bigint "region_id"
     t.string "address"

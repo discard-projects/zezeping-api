@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   after_initialize :initialize_defaults, :if => :new_record?
 
   belongs_to :user
-  belongs_to :shop
+  belongs_to :shop, counter_cache: true
 
   private
 
