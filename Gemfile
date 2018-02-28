@@ -31,6 +31,13 @@ gem 'omniauth-facebook'
 
 gem 'timequery', github: 'wuyuedefeng/timequery'
 gem 'footprintable', github: 'wuyuedefeng/footprintable'
+# 表单
+gem 'reform'
+gem 'reform-rails'
+# 分页
+gem 'kaminari'
+# 搜索
+gem 'ransack'
 gem 'base_resource', github: 'wuyuedefeng/base-resource'
 # tree
 gem 'ancestry'
@@ -46,6 +53,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rails-erd', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

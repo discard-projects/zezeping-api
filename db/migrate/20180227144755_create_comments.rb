@@ -8,8 +8,6 @@ class CreateComments < ActiveRecord::Migration[5.1]
       t.string  :rank_detail
       t.integer :per_expense, default: 0
 
-      t.string :attachments
-
       t.timestamps
     end
   end

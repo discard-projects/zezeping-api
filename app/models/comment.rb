@@ -3,8 +3,6 @@ class Comment < ApplicationRecord
   store :rank_detail, :accessors => [:rank_taste, :rank_env, :rank_service]
   after_initialize :initialize_defaults, :if => :new_record?
 
-  serialize :attachments, Array
-
   belongs_to :user
   belongs_to :shop
 
