@@ -1,6 +1,6 @@
 class Shop < ApplicationRecord
-  belongs_to :category
-  belongs_to :region
+  belongs_to :category, optional: true
+  belongs_to :region, optional: true
   has_one :shop_detail
   has_many :comments
 
