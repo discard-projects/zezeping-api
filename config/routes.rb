@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       scope module: 'admin' do
         resources :shops
         resources :regions
+        resources :categories
       end
     end
   end
