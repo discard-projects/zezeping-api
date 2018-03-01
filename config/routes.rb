@@ -10,5 +10,13 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    # apa
+    constraints subdomain: /\Aapa/ do
+      scope module: 'admin' do
+        resources :shops
+        resources :regions
+      end
+    end
   end
 end
