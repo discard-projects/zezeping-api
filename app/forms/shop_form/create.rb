@@ -4,6 +4,7 @@ module ShopForm
 
     property :name
     property :category_id
+    property :region_id
 
     validates :name, presence: true, length: { maximum: 40 }
   end
