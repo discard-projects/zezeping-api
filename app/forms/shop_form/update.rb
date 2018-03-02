@@ -3,6 +3,7 @@ module ShopForm
     model :shop
 
     property :name
+    property :desc
     property :category_id
     property :region_id
 

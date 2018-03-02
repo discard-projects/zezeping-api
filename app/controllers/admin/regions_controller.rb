@@ -1,6 +1,6 @@
 class Admin::RegionsController < ApplicationController
-  def index
+  def index_roots
     regions = Region.roots
-    super regions
+    br_index regions
   end
 end
