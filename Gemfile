@@ -60,6 +60,7 @@ group :development do
   gem 'rails-erd', require: false
   # deploy
   gem 'mina'
+  gem 'mina-puma', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

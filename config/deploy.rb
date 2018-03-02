@@ -2,6 +2,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/puma'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -12,7 +13,7 @@ require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 set :application_name, 'zezeping'
 set :domain, 'deploy@47.75.36.40'
 set :deploy_to, '/mnt/www/zezeping'
-set :repository, 'git@gitee.com:zezeping/zezeping.git'
+set :repository, 'git@bitbucket.org:zezeping-group/zezeping.git'
 set :branch, 'master'
 
 # Optional settings:
@@ -60,8 +61,9 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    invoke :'rails:db_create'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
