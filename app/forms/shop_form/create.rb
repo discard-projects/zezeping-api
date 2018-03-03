@@ -9,6 +9,8 @@ module ShopForm
     property :logo
     property :attachment_image_ids
 
+    # collection :attachment_images, populate_if_empty: AttachmentImage, form: AttachmentImageForm::Create
+
     validates :name, presence: true, length: { maximum: 40 }
   end
 end

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :categories do
           get :index_roots, on: :collection
         end
+        resources :attachment_images
       end
     end
   end

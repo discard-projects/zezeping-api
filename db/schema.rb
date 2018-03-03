@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180228042748) do
   create_table "shop_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "shop_id"
     t.string "phones"
+    t.string "images"
     t.string "rank_detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
