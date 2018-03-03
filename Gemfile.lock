@@ -96,7 +96,7 @@ GEM
       responders
       warden (~> 1.2.3)
     devise_token_auth (0.1.42)
-      devise (> 3.5.2, <= 4.3)
+      devise (> 3.5.2, <= 4.4)
       rails (< 6)
     disposable (0.4.3)
       declarative (>= 0.0.9, < 1.0.0)
@@ -152,6 +152,7 @@ GEM
     mina-puma (1.1.0)
       mina (~> 1.2.0)
       puma (>= 2.13)
+    mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -278,6 +279,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mina
   mina-puma
+  mini_magick
   mysql2 (>= 0.3.18, < 0.5)
   omniauth-facebook
   puma (~> 3.7)

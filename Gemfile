@@ -44,7 +44,7 @@ gem 'ancestry'
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-aliyun'
-
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
