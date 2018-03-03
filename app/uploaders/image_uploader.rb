@@ -3,7 +3,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  include Piet::CarrierWaveExtension
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
@@ -16,6 +15,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
     # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     nil
+  end
+
+  def cache_dir
+    # should return path to cache dir
+    Rails.root.join 'tmp/uploads'
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -48,7 +52,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     # "something.jpg" if original_filename
-    @name ||= "#{model.model_name.name}/#{mounted_as.to_s}/#{md5}#{File.extname(original_filename)}" if original_filename.present?
+    @name ||= "#{model.model_name.name.downcase}/#{mounted_as.to_s}/#{md5}#{File.extname(original_filename)}" if original_filename.present?
   end
 
   private

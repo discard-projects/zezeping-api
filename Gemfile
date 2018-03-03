@@ -44,7 +44,6 @@ gem 'ancestry'
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-aliyun'
-gem 'piet'
 
 
 group :development, :test do

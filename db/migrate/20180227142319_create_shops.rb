@@ -9,10 +9,14 @@ class CreateShops < ActiveRecord::Migration[5.1]
       t.references :region, foreign_key: true
       t.string :address
       t.string :logo
+      t.string :images
       t.decimal :rank, precision: 2, scale: 1
       t.integer :per_expense, default: 0
       t.decimal :lat, precision: 10, scale: 6
       t.decimal :lng, precision: 10, scale: 6
+
+      t.string :phones
+      t.string :rank_detail
 
       t.timestamps
     end

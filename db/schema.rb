@@ -14,8 +14,11 @@ ActiveRecord::Schema.define(version: 20180228042748) do
 
   create_table "attachment_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "file"
+    t.string "owner_type"
+    t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["owner_type", "owner_id"], name: "index_attachment_images_on_owner_type_and_owner_id"
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.decimal "rank_taste", precision: 2, scale: 1
     t.decimal "rank_env", precision: 2, scale: 1
     t.decimal "rank_service", precision: 2, scale: 1
-    t.integer "per_expense", default: 0
+    t.integer "per_expense"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_comments_on_shop_id"
@@ -81,10 +84,13 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.bigint "region_id"
     t.string "address"
     t.string "logo"
+    t.string "images"
     t.decimal "rank", precision: 2, scale: 1
     t.integer "per_expense", default: 0
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
+    t.string "phones"
+    t.string "rank_detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_shops_on_category_id"
