@@ -6,6 +6,7 @@ class CreateStoreDetails < ActiveRecord::Migration[5.1]
       t.string :phones
       t.string :extra_contact_detail
       t.string :rank_detail
+      t.text :summary
 
       t.timestamps
     end

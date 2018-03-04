@@ -19,7 +19,6 @@ task :boniu => :environment do
         phones.delete('')
         store_params = {
           name: store['sname'],
-          desc: store['summary'],
           remote_logo_url: logo,
           opening_at: store['openstart'],
           closing_at: store['openend'],
@@ -28,12 +27,15 @@ task :boniu => :environment do
         # p store_params
         @store = Store.new(store_params)
         Store.transaction do
-          @store.save
-          @store.store_detail.update({
-            remote_wechat_qrcode_url: wechat_qrcode,
-            qq: store['qq'],
-            phones: phones
-          })
+          if @store.save
+            @store.store_detail.update({
+              remote_wechat_qrcode_url: wechat_qrcode,
+              qq: store['qq'],
+              phones: phones,
+              summary: store['summary'],
+            })
+          end
+          p "#{@store.name} - #{@store.id} finish"
           # catch_page(store_url, @store)
         end
       end

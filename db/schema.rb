@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20180304032222) do
     t.string "phones"
     t.string "extra_contact_detail"
     t.string "rank_detail"
+    t.text "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_store_details_on_store_id"
