@@ -1,6 +1,6 @@
-module ShopForm
+module StoreForm
   class Create < Reform::Form
-    model :shop
+    model :store
 
     property :name
     property :desc

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228042748) do
+ActiveRecord::Schema.define(version: 20180304032222) do
 
   create_table "attachment_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "file"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20180228042748) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
-    t.bigint "shop_id"
+    t.bigint "stores_id"
     t.string "content"
     t.decimal "rank", precision: 2, scale: 1
     t.decimal "rank_taste", precision: 2, scale: 1
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.integer "per_expense"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shop_id"], name: "index_comments_on_shop_id"
+    t.index ["stores_id"], name: "index_comments_on_stores_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -66,17 +66,18 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.index ["ancestry"], name: "index_regions_on_ancestry"
   end
 
-  create_table "shop_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "shop_id"
+  create_table "store_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "store_id"
+    t.string "wechat_qrcode"
     t.string "phones"
-    t.string "images"
+    t.string "extra_contact_detail"
     t.string "rank_detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shop_id"], name: "index_shop_details_on_shop_id"
+    t.index ["store_id"], name: "index_store_details_on_store_id"
   end
 
-  create_table "shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "desc"
     t.integer "status", default: 0
@@ -90,12 +91,12 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.integer "per_expense", default: 0
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
-    t.string "phones"
-    t.string "rank_detail"
+    t.time "opening_at"
+    t.time "closing_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_shops_on_category_id"
-    t.index ["region_id"], name: "index_shops_on_region_id"
+    t.index ["category_id"], name: "index_stores_on_category_id"
+    t.index ["region_id"], name: "index_stores_on_region_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -127,9 +128,9 @@ ActiveRecord::Schema.define(version: 20180228042748) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "comments", "shops"
+  add_foreign_key "comments", "stores", column: "stores_id"
   add_foreign_key "comments", "users"
-  add_foreign_key "shop_details", "shops"
-  add_foreign_key "shops", "categories"
-  add_foreign_key "shops", "regions"
+  add_foreign_key "store_details", "stores"
+  add_foreign_key "stores", "categories"
+  add_foreign_key "stores", "regions"
 end

@@ -1,5 +1,5 @@
 class Region < ApplicationRecord
   has_ancestry
 
-  has_many :shops
+  has_many :stores
 end

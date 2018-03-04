@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     # apa
     constraints subdomain: /\Aapa/ do
       scope module: 'admin' do
-        resources :shops
+        resources :stores
+        resources :stores
         resources :regions do
           get :index_roots, on: :collection
         end

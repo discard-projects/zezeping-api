@@ -1,6 +1,7 @@
-class CreateShops < ActiveRecord::Migration[5.1]
+class CreateStores < ActiveRecord::Migration[5.1]
   def change
-    create_table :shops do |t|
+    create_table :stores do |t|
+
       t.string :name
       t.string :desc
       t.integer :status, default: 0
@@ -15,8 +16,8 @@ class CreateShops < ActiveRecord::Migration[5.1]
       t.decimal :lat, precision: 10, scale: 6
       t.decimal :lng, precision: 10, scale: 6
 
-      t.string :phones
-      t.string :rank_detail
+      t.time :opening_at
+      t.time :closing_at
 
       t.timestamps
     end

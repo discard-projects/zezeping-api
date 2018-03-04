@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 # auth
+gem 'devise', '~> 4.4'
 gem 'devise_token_auth'
 # facebook part auth
 gem 'omniauth-facebook'
@@ -57,6 +58,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd', require: false
+  # better errors
+  gem "better_errors"
+  gem "binding_of_caller"
   # deploy
   gem 'mina'
   gem 'mina-puma', :require => false
