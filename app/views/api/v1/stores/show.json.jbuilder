@@ -1,5 +1,5 @@
 json.item do
-  json.(@store, :id, :name, :desc, :category_id, :attachment_image_ids, :region_id, :created_at)
+  json.(@store, :id, :name, :desc, :category_id, :comments_count, :per_expense, :address, :rank, :attachment_image_ids, :region_id, :created_at)
   json.logo_url @store.logo
   json.store_detail do
     json.rank_taste @store.store_detail.rank_taste
