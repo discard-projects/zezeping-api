@@ -8,7 +8,9 @@ Rails.application.routes.draw do
         namespace :v1 do
           resources :home
           resource :profile
-          resources :stores
+          resources :stores do
+            resources :comments
+          end
         end
       end
     end

@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(version: 20180304032222) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
-    t.bigint "stores_id"
+    t.bigint "store_id"
     t.string "content"
-    t.decimal "rank", precision: 2, scale: 1
-    t.decimal "rank_taste", precision: 2, scale: 1
-    t.decimal "rank_env", precision: 2, scale: 1
-    t.decimal "rank_service", precision: 2, scale: 1
+    t.decimal "rank", precision: 2, scale: 1, default: "0.0"
+    t.decimal "rank_taste", precision: 2, scale: 1, default: "0.0"
+    t.decimal "rank_env", precision: 2, scale: 1, default: "0.0"
+    t.decimal "rank_service", precision: 2, scale: 1, default: "0.0"
     t.integer "per_expense"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stores_id"], name: "index_comments_on_stores_id"
+    t.index ["store_id"], name: "index_comments_on_store_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20180304032222) do
     t.string "address"
     t.string "logo"
     t.string "images"
-    t.decimal "rank", precision: 2, scale: 1
+    t.decimal "rank", precision: 2, scale: 1, default: "0.0"
     t.integer "per_expense", default: 0
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20180304032222) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "comments", "stores", column: "stores_id"
+  add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "categories"
