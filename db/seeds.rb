@@ -8,3 +8,4 @@
 
 Rake::Task['samples:regions'].invoke
 Rake::Task['samples:categories'].invoke
+Rake::Task['samples:admins'].invoke
