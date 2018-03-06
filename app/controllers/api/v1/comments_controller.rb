@@ -3,4 +3,9 @@ class Api::V1::CommentsController < ApplicationController
     @store = Store.find(params[:store_id])
     super @store.comments
   end
+
+  def create
+    params['user_id'] = current_user.id
+    super
+  end
 end
