@@ -11,7 +11,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # size of greater than or equal to 1 byte and less than or equal to 10 MB
   # 1..10.megabytes
   def size_range
-    1..0.5.megabytes
+    1..0.6.megabytes
   end
 
   # Override the directory where uploaded files will be stored.
@@ -42,8 +42,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
+  version :thumb do
+    process resize_to_fit: [100, 100]
+  end
+
+  version :thumb2 do
+    process resize_to_fit: [200, 150]
+  end
+
+  version :small do
+    process resize_to_fit: [300, 240]
+  end
+
+  version :middle do
+    process resize_to_fit: [800, 600]
+  end
+
+  # version :large do
+  #   process resize_to_fit: [1200, 768]
   # end
 
   # Add a white list of extensions which are allowed to be uploaded.
