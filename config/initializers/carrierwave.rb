@@ -12,5 +12,5 @@ CarrierWave.configure do |config|
   # 自定义域名请 CNAME 到 you_bucket_name.oss-cn-hangzhou.aliyuncs.com (you_bucket_name 是你的 bucket 的名称)
   config.aliyun_host       = $env['aliyun']['oss']['host']
   # Bucket 为私有读取请设置 true，默认 false，以便得到的 URL 是能带有 private 空间访问权限的逻辑
-  # config.aliyun_private_read = false
+  config.aliyun_private_read = $env['aliyun']['oss']['private_read']
 end
