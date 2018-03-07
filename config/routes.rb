@@ -18,6 +18,7 @@ Rails.application.routes.draw do
           resources :stores do
             resources :comments
           end
+          resources :attachment_images
         end
       end
     end

@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :store, counter_cache: true
+  has_many :attachment_images, as: :owner, dependent: :destroy
 
   after_commit :update_store, on: :create
 

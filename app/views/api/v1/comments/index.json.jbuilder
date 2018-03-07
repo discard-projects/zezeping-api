@@ -6,4 +6,8 @@ json.items @comments do |comment|
     json.name comment.user.name
     json.nickname comment.user.nickname
   end
+  json.attachment_images comment.attachment_images do |attachment_image|
+    json.file_thumb attachment_image.file.thumb
+    json.file_small attachment_image.file.small
+  end
 end

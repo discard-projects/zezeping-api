@@ -7,6 +7,8 @@ module CommentForm
     property :rank
     property :content
 
+    property :attachment_image_ids
+
     validates :store_id, presence: true
     validates :rank, presence: true, numericality: { greater_than: 0 }
     validates :content, presence: true, length: { maximum: 255 }
