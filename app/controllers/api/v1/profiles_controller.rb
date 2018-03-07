@@ -1,6 +1,4 @@
-module Api::V1
-  class ProfilesController < BaseController
-    def show
-    end
+class Api::V1::ProfilesController < Api::V1::BaseController
+  def show
   end
 end

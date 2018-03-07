@@ -1,4 +1,4 @@
-class Admin::AttachmentImagesController < ApplicationController
+class Admin::AttachmentImagesController < Admin::BaseController
   def create
     super do |hash, form|
       form.save

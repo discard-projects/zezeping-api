@@ -1,4 +1,4 @@
-class Api::V1::CommentsController < ApplicationController
+class Api::V1::CommentsController < Api::V1::BaseController
   skip_before_action :authenticate_user!, only: [:index]
   def index
     @store = Store.find(params[:store_id])

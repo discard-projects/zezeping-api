@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     mount_devise_token_auth_for 'User', at: 'auth'
 
-  mount_devise_token_auth_for 'Admin', at: 'auth'
+  mount_devise_token_auth_for 'Admin', at: 'auth2'
   as :admin do
     # Define routes for Admin within this block.
   end
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     # apa
     constraints subdomain: /\Aapa/ do
       scope module: 'admin' do
-        resources :stores
+        resource :profile
         resources :stores
         resources :regions do
           get :index_roots, on: :collection
