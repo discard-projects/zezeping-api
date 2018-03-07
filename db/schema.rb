@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180306133235) do
+ActiveRecord::Schema.define(version: 20180307021756) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider", default: "email", null: false
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20180306133235) do
     t.bigint "store_id"
     t.string "content"
     t.decimal "rank", precision: 2, scale: 1, default: "0.0"
-    t.decimal "rank_taste", precision: 2, scale: 1, default: "0.0"
-    t.decimal "rank_env", precision: 2, scale: 1, default: "0.0"
-    t.decimal "rank_service", precision: 2, scale: 1, default: "0.0"
+    t.decimal "rank_taste", precision: 2, scale: 1
+    t.decimal "rank_env", precision: 2, scale: 1
+    t.decimal "rank_service", precision: 2, scale: 1
     t.integer "per_expense"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
