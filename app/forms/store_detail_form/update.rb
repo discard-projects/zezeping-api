@@ -1,6 +1,6 @@
 module StoreDetailForm
   class Update < Reform::Form
-    model :shop_detail
+    model :store_detail
 
     property :phones
     property :wechat_qrcode
