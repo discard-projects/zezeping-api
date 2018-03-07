@@ -10,6 +10,6 @@ json.item do
   end
   json.attachment_images @store.attachment_images do |attachment_image|
     json.file_thumb_url attachment_image.file.thumb.url
-    json.file_url attachment_image.file.url
+    json.file_url attachment_image.file.middle.url
   end
 end
