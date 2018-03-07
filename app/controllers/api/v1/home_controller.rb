@@ -1,5 +1,5 @@
 class Api::V1::HomeController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :stores]
   def index
     @categories = Category.where(recommended: true)
   end
