@@ -9,6 +9,7 @@ json.item do
     json.wechat_qrcode_url @store.store_detail.wechat_qrcode.thumb.url
   end
   json.attachment_images @store.attachment_images do |attachment_image|
-    json.(attachment_image, :id, :file)
+    json.file_thumb_url attachment_image.file.thumb.url
+    json.file_url attachment_image.file.middle.url
   end
 end
