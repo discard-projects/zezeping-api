@@ -8,8 +8,8 @@ class Comment < ApplicationRecord
 
   def update_store
     store.update({
-       rank: store.comments.average(:rank),
-       per_expense: store.comments.average(:per_expense)
+       rank: store.comments.average(:rank) || 0,
+       per_expense: store.comments.average(:per_expense) || 0
     })
     store.store_detail.update({
       rank_taste: store.comments.average(:rank_taste) || 0,
