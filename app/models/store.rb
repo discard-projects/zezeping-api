@@ -15,7 +15,7 @@ class Store < ApplicationRecord
   private
 
   def create_store_detail
-    self.store_detail = StoreDetail.create
+    self.store_detail ||= StoreDetail.create
   end
 
 end
