@@ -6,6 +6,7 @@ json.item do
     json.rank_env @store.store_detail.rank_env
     json.rank_service @store.store_detail.rank_service
     json.phones @store.store_detail.phones
+    json.wechat_qrcode_url @store.store_detail.wechat_qrcode.thumb.url
   end
   json.attachment_images @store.attachment_images do |attachment_image|
     json.(attachment_image, :id, :file)
