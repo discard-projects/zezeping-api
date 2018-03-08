@@ -4,4 +4,8 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable
   include DeviseTokenAuth::Concerns::User
+
+  def sec_email
+    email.gsub(/(\A.{2})(.*)(@.*\z)/){"#{$1}***#{$3}"}
+  end
 end

@@ -6,6 +6,8 @@ module CommentForm
     property :user_id
     property :rank
     property :content
+    # 是否匿名评论
+    property :anonymous
 
     property :attachment_image_ids
 
