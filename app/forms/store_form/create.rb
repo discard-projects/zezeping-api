@@ -6,6 +6,7 @@ module StoreForm
     property :desc
     property :category_id
     property :region_id
+    property :address
     property :logo
     property :attachment_image_ids
 
