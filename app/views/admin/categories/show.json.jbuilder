@@ -1,3 +1,3 @@
 json.item do
-  json.(@category, :id, :name, :created_at)
+  json.(@category, :id, :name, :enabled, :recommended, :created_at)
 end
