@@ -36,7 +36,9 @@ Rails.application.routes.draw do
           put :toggle_switch, on: :member
         end
         resources :attachment_images
-        resources :banners
+        resources :banners do
+          put :toggle_switch, on: :member
+        end
       end
     end
   end
