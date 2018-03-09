@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308120929) do
+ActiveRecord::Schema.define(version: 20180309091432) do
 
-  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true
   end
 
-  create_table "attachment_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "attachment_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "file"
     t.string "owner_type"
     t.bigint "owner_id"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["owner_type", "owner_id"], name: "index_attachment_images_on_owner_type_and_owner_id"
   end
 
-  create_table "banners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "banners", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.string "image"
     t.string "desc"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,7 +73,14 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories_stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "category_id"
+    t.bigint "store_id"
+    t.index ["category_id"], name: "index_categories_stores_on_category_id"
+    t.index ["store_id"], name: "index_categories_stores_on_store_id"
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "user_id"
     t.bigint "store_id"
     t.string "content"
@@ -89,7 +96,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "footprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "footprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.text "before"
     t.text "after"
     t.string "action"
@@ -103,7 +110,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["trackable_type", "trackable_id"], name: "index_footprints_on_trackable_type_and_trackable_id"
   end
 
-  create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -111,7 +118,7 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["ancestry"], name: "index_regions_on_ancestry"
   end
 
-  create_table "store_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "store_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "store_id"
     t.string "wechat_qrcode"
     t.string "phones"
@@ -123,12 +130,11 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.index ["store_id"], name: "index_store_details_on_store_id"
   end
 
-  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.string "desc"
     t.integer "status", default: 0
     t.integer "comments_count", default: 0
-    t.bigint "category_id"
     t.bigint "region_id"
     t.string "address"
     t.string "logo"
@@ -141,11 +147,10 @@ ActiveRecord::Schema.define(version: 20180308120929) do
     t.time "closing_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_stores_on_category_id"
     t.index ["region_id"], name: "index_stores_on_region_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -180,6 +185,5 @@ ActiveRecord::Schema.define(version: 20180308120929) do
   add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
   add_foreign_key "store_details", "stores"
-  add_foreign_key "stores", "categories"
   add_foreign_key "stores", "regions"
 end

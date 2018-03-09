@@ -4,7 +4,7 @@ module StoreForm
 
     property :name
     property :desc
-    property :category_id
+    property :category_ids
     property :region_id
     property :address
     property :logo

@@ -4,7 +4,8 @@ class Store < ApplicationRecord
   enum status: { status_created: 0, status_pended: 1, status_checked: 2, status_failed: 3 }
   ransacker :status, formatter: proc { |v| statuses[v] }
 
-  belongs_to :category, optional: true
+  # belongs_to :category, optional: true
+  has_and_belongs_to_many :categories
   belongs_to :region, optional: true
   has_many :comments
   has_many :attachment_images, as: :owner, dependent: :destroy
