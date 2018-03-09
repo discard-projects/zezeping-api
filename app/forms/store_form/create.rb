@@ -11,7 +11,7 @@ module StoreForm
     property :attachment_image_ids
 
     # collection :attachment_images, populate_if_empty: AttachmentImage, form: AttachmentImageForm::Create
-    property :store_detail, populate_if_empty: StoreDetailForm, form: StoreDetailForm::Create
+    property :store_detail, populate_if_empty: StoreDetail, form: StoreDetailForm::Create
 
     validates :name, presence: true, length: { maximum: 40 }
   end
