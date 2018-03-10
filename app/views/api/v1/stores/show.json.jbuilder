@@ -1,7 +1,7 @@
 json.item do
   json.(@store, :id, :name, :desc, :comments_count, :per_expense, :address, :rank, :attachment_image_ids, :region_id, :created_at)
   json.category_names @store.categories.pluck(:name)
-  json.logo_url @store.logo.thumb.url
+  json.logo @store.logo.thumb
   json.store_detail do
     json.rank_taste @store.store_detail.rank_taste
     json.rank_env @store.store_detail.rank_env
