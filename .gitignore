@@ -20,3 +20,5 @@
 
 application.yml
 erd.pdf
+
+/config/deploy/server
