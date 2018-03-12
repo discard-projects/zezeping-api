@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309091432) do
+ActiveRecord::Schema.define(version: 20180312023259) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 20180309091432) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "user_id"
-    t.bigint "store_id"
     t.string "content"
     t.decimal "rank", precision: 2, scale: 1, default: "0.0"
     t.decimal "rank_taste", precision: 2, scale: 1
@@ -92,7 +91,9 @@ ActiveRecord::Schema.define(version: 20180309091432) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "anonymous", default: false
-    t.index ["store_id"], name: "index_comments_on_store_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -182,7 +183,6 @@ ActiveRecord::Schema.define(version: 20180309091432) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"

@@ -7,7 +7,7 @@ class Store < ApplicationRecord
   # belongs_to :category, optional: true
   has_and_belongs_to_many :categories
   belongs_to :region, optional: true
-  has_many :comments
+  has_many :comments, :as => :commentable
   has_many :attachment_images, as: :owner, dependent: :destroy
   has_one :store_detail, dependent: :destroy
 

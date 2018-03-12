@@ -15,7 +15,7 @@ Rails.application.routes.draw do
             get :stores, on: :collection
           end
           resource :profile
-          resources :stores do
+          resources :stores, model_name: 'Store' do
             resources :comments
           end
           resources :attachment_images

@@ -2,7 +2,7 @@ module CommentForm
   class Create < Reform::Form
     model :comment
 
-    property :store_id
+    property :commentable
     property :user_id
     property :rank
     property :content
@@ -11,7 +11,7 @@ module CommentForm
 
     property :attachment_image_ids
 
-    validates :store_id, presence: true
+    validates :commentable, presence: true
     validates :rank, presence: true, numericality: { greater_than: 0 }
     validates :content, presence: true, length: { maximum: 255 }
   end
