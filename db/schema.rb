@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312023259) do
+ActiveRecord::Schema.define(version: 20180312051412) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20180312023259) do
     t.boolean "anonymous", default: false
     t.string "commentable_type"
     t.bigint "commentable_id"
+    t.string "tmp_nickname"
+    t.string "tmp_avatar"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end

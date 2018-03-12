@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     constraints subdomain: /\Aapa/ do
       scope module: 'admin' do
         resource :profile
-        resources :stores
+        resources :stores, model_name: 'Store' do
+          resources :comments
+        end
         resources :regions do
           get :index_roots, on: :collection
         end

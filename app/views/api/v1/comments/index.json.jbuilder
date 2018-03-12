@@ -4,10 +4,10 @@ json.items @comments do |comment|
   json.user do
     json.id_hash Digest::SHA1.hexdigest("#{comment.user.id}")
     if comment.anonymous
-      json.nickname comment.user.sec_email
+      json.nickname comment.tmp_nickname || comment.user.sec_email
     else
-      json.image comment.user.image
-      json.nickname comment.user.nickname || comment.user.name
+      json.image comment.tmp_avatar.thumb.url || comment.user.image
+      json.nickname comment.tmp_nickname || comment.user.nickname || comment.user.name
     end
   end
   json.attachment_images comment.attachment_images do |attachment_image|

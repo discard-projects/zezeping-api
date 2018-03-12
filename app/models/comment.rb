@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  mount_uploader :tmp_avatar, ImageUploader
+
   belongs_to :user
   belongs_to :commentable, polymorphic: true, counter_cache: true
   has_many :attachment_images, as: :owner, dependent: :destroy

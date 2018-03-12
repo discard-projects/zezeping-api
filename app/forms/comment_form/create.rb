@@ -9,6 +9,10 @@ module CommentForm
     # 是否匿名评论
     property :anonymous
 
+
+    property :tmp_nickname
+    property :tmp_avatar
+
     property :attachment_image_ids
 
     validates :commentable, presence: true
