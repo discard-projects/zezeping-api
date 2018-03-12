@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312051412) do
+ActiveRecord::Schema.define(version: 20180312062117) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -113,6 +113,19 @@ ActiveRecord::Schema.define(version: 20180312051412) do
     t.index ["trackable_type", "trackable_id"], name: "index_footprints_on_trackable_type_and_trackable_id"
   end
 
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "store_id"
+    t.bigint "category_id"
+    t.string "name"
+    t.decimal "price", precision: 10, scale: 2, default: "0.0"
+    t.string "dest"
+    t.decimal "rank", precision: 2, scale: 1, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
   create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -186,6 +199,8 @@ ActiveRecord::Schema.define(version: 20180312051412) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "stores"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
 end

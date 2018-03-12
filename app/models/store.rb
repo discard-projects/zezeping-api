@@ -5,8 +5,10 @@ class Store < ApplicationRecord
   ransacker :status, formatter: proc { |v| statuses[v] }
 
   # belongs_to :category, optional: true
-  has_and_belongs_to_many :categories
+  # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Association+callbacks
+  has_and_belongs_to_many :categories, after_remove: Proc.new { |store, category| store.products.where(category: category).update_all(category_id: nil) }
   belongs_to :region, optional: true
+  has_many :products
   has_many :comments, :as => :commentable
   has_many :attachment_images, as: :owner, dependent: :destroy
   has_one :store_detail, dependent: :destroy
@@ -18,5 +20,4 @@ class Store < ApplicationRecord
   def create_store_detail
     self.store_detail ||= StoreDetail.create
   end
-
 end
