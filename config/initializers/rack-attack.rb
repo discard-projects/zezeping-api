@@ -9,16 +9,16 @@ class Rack::Attack
 
   ### Throttle Spammy Clients ###
 
-  # Throttle all requests by IP [一个ip3分钟最多发送180个请求]
+  # Throttle all requests by IP [一个ip3分钟最多发送120个请求]
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  throttle('req/ip', :limit => 180, :period => 3.minutes) do |req|
+  throttle('req/ip', :limit => 120, :period => 3.minutes) do |req|
     req.ip # unless req.path.start_with?('/assets')
   end
 
   # Throttle POST requests to /login by IP address [1个ip，20s最多可调用5次登陆接口]
   # Key: "rack::attack:#{Time.now.to_i/:period}:logins/ip:#{req.ip}"
   throttle('logins/ip', :limit => 5, :period => 20.seconds) do |req|
-    if req.path == '/login' && req.post?
+    if req.path == '/auth_admin/sign_in' && req.post?
       req.ip
     end
   end
