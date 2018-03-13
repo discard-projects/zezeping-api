@@ -11,14 +11,14 @@ Rails.application.routes.draw do
     constraints subdomain: /\Aapi/ do
       scope module: 'api' do
         namespace :v1 do
-          resources :home do
+          resources :home, only: [:index], do
             get :stores, on: :collection
           end
-          resource :profile
-          resources :stores, model_name: 'Store' do
-            resources :comments
+          resource :profile, only: [:show, :update]
+          resources :stores, only: [:index, :show], model_name: 'Store' do
+            resources :comments, only: [:index, :create]
           end
-          resources :attachment_images
+          resources :attachment_images, only: [:create]
         end
       end
     end
