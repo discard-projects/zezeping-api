@@ -11,7 +11,7 @@ require 'mina/puma'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :application_name, 'zezeping'
-set :domain, 'deploy@47.75.36.40'
+set :domain, 'deploy@47.75.72.202'
 set :deploy_to, '/mnt/www/zezeping'
 set :repository, 'git@bitbucket.org:zezeping-group/zezeping.git'
 set :branch, 'master'
