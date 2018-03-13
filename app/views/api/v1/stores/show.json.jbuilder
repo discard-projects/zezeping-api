@@ -13,4 +13,11 @@ json.item do
     json.file_thumb_url attachment_image.file.thumb.url
     json.file_url attachment_image.file.url
   end
+
+  if @store.lat.present? && @store.lng.present?
+    json.position do
+      json.lat @store.lat.to_f
+      json.lng @store.lng.to_f
+    end
+  end
 end
