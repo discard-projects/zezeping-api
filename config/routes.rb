@@ -19,6 +19,9 @@ Rails.application.routes.draw do
             resources :comments, only: [:index, :create]
           end
           resources :attachment_images, only: [:create]
+          resources :categories, only: [:show] do
+            get :stores, on: :member
+          end
         end
       end
     end
