@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   has_ancestry
+  acts_as_list scope: [:ancestry]
 
   has_and_belongs_to_many :stores
   # has_many :products, :through => :stores

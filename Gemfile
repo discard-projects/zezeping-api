@@ -42,11 +42,12 @@ gem 'ransack'
 gem 'base_resource', github: 'wuyuedefeng/base-resource'
 # tree
 gem 'ancestry'
+# position
+gem 'acts_as_list'
 # 上传组件
 gem 'carrierwave'
 gem 'carrierwave-aliyun'
 gem 'mini_magick'
-
 # 限流等
 gem 'rack-attack'
 

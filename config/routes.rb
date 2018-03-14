@@ -38,7 +38,7 @@ Rails.application.routes.draw do
         end
         resources :categories do
           get :index_roots, on: :collection
-          put :toggle_switch, on: :member
+          put :toggle_switch, :increment_position, :decrement_position, on: :member
         end
         resources :attachment_images
         resources :banners do
