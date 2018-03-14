@@ -4,7 +4,8 @@ class Admin::AttachmentImagesController < Admin::BaseController
       form.save
       render json: {
         msg: 'successfully_create',
-        item: form.model.as_json(only: [:id, :file])
+        item: form.model.as_json(only: [:id, :file]),
+        errors: form.model.errors
       }, status: 200 and return
     end
   end
