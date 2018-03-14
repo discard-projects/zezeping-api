@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
+  mount_uploader :logo, ImageUploader
   has_ancestry
   acts_as_list scope: [:ancestry]
 

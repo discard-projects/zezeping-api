@@ -6,6 +6,7 @@ module CategoryForm
     property :parent_id
     property :enabled
     property :recommended
+    property :logo
 
     validates :name, presence: true, length: { maximum: 40 }
   end
