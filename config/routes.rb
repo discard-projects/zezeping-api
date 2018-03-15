@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           resources :categories, only: [:show] do
             get :stores, on: :member
           end
+          resources :moments, only: [:index]
         end
       end
     end
