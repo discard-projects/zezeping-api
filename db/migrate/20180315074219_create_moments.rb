@@ -4,6 +4,7 @@ class CreateMoments < ActiveRecord::Migration[5.1]
       t.references :store, foreign_key: true
       t.string :content
       t.integer :comments_count, default: 0
+      t.boolean :enabled, default: false
 
       t.timestamps
     end

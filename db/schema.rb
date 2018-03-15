@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20180315074219) do
     t.bigint "store_id"
     t.string "content"
     t.integer "comments_count", default: 0
+    t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_moments_on_store_id"

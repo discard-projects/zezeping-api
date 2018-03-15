@@ -44,6 +44,9 @@ Rails.application.routes.draw do
         resources :banners do
           put :toggle_switch, on: :member
         end
+        resources :moments do
+          put :toggle_switch, on: :member
+        end
       end
     end
   end
