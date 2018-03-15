@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           resources :categories, only: [:show] do
             get :stores, on: :member
           end
+          resources :moments, only: [:index]
         end
       end
     end
@@ -42,6 +43,9 @@ Rails.application.routes.draw do
         end
         resources :attachment_images
         resources :banners do
+          put :toggle_switch, on: :member
+        end
+        resources :moments do
           put :toggle_switch, on: :member
         end
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315034514) do
+ActiveRecord::Schema.define(version: 20180315074219) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20180315034514) do
     t.index ["trackable_type", "trackable_id"], name: "index_footprints_on_trackable_type_and_trackable_id"
   end
 
+  create_table "moments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "store_id"
+    t.string "content"
+    t.integer "comments_count", default: 0
+    t.boolean "enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_moments_on_store_id"
+  end
+
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "store_id"
     t.bigint "category_id"
@@ -202,6 +212,7 @@ ActiveRecord::Schema.define(version: 20180315034514) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "moments", "stores"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
   add_foreign_key "store_details", "stores"
