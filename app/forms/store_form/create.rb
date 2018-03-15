@@ -11,9 +11,6 @@ module StoreForm
     property :logo
     property :attachment_image_ids
 
-    property :lat
-    property :lng
-
     # collection :attachment_images, populate_if_empty: AttachmentImage, form: AttachmentImageForm::Create
     property :store_detail, populate_if_empty: StoreDetail, form: StoreDetailForm::Create
 
