@@ -4,6 +4,7 @@ module StoreForm
 
     property :name
     property :desc
+    property :open_time_desc
     property :category_ids
     property :region_id
     property :address
