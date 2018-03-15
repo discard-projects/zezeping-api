@@ -1,4 +1,7 @@
 class Store < ApplicationRecord
+  geocoded_by :address, :latitude  => :lat, :longitude => :lng
+  after_validation :geocode
+
   mount_uploader :logo, ImageUploader
 
   enum status: { status_created: 0, status_pended: 1, status_checked: 2, status_failed: 3 }
