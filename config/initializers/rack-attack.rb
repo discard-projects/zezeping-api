@@ -9,9 +9,9 @@ class Rack::Attack
 
   ### Throttle Spammy Clients ###
 
-  # Throttle all requests by IP [一个ip3分钟最多发送120个请求]
+  # Throttle all requests by IP [一个ip3分钟最多发送xx个请求]
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  throttle('req/ip', :limit => 120, :period => 3.minutes) do |req|
+  throttle('req/ip', :limit => 180, :period => 3.minutes) do |req|
     req.ip # unless req.path.start_with?('/assets')
   end
 
