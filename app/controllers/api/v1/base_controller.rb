@@ -15,6 +15,8 @@ class Api::V1::BaseController < ApplicationController
   def encrypt_data
     yield
   ensure
-    response.body = ResponseEncryption::encrypt(response.body)
+    if response.kind_of? Net::HTTPSuccess
+      response.body = ResponseEncryption::encrypt(response.body)
+    end
   end
 end
