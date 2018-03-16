@@ -1,6 +1,6 @@
 class Api::V1::BaseController < ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?
-  around_action :set_thread_footprint_actor
+  around_action :encrypt_data, :set_thread_footprint_actor
 
   private
 
@@ -10,5 +10,11 @@ class Api::V1::BaseController < ApplicationController
   ensure
     # to address the thread variable leak issues in Puma/Thin webserver
     Footprintable::Current.actor = nil
+  end
+
+  def encrypt_data
+    yield
+  ensure
+    response.body = ResponseEncryption::encrypt(response.body)
   end
 end
