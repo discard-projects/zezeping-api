@@ -15,7 +15,7 @@ class Api::V1::BaseController < ApplicationController
   def encrypt_data
     yield
   ensure
-    if response.kind_of? Net::HTTPSuccess
+    if response.status < 400 && response.status >= 200
       response.body = ResponseEncryption::encrypt(response.body)
     end
   end
