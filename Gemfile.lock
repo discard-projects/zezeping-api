@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/wuyuedefeng/base-resource.git
-  revision: 7faf485b128770129cafaf565115abe0342eec18
+  revision: e4c85150287bbdc46c0fed08ae8f7ff856dcc022
   specs:
-    base_resource (0.1.2)
+    base_resource (0.1.3)
       kaminari
       rails (< 6)
       ransack
@@ -63,7 +63,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts_as_list (0.9.10)
+    acts_as_list (0.9.11)
       activerecord (>= 3.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
@@ -99,10 +99,10 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
-    devise (4.4.1)
+    devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.2)
+      railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
     devise_token_auth (0.1.43)
@@ -171,7 +171,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.4.10)
-    nio4r (2.2.0)
+    nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     oauth2 (1.4.0)
@@ -229,7 +229,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.3.0)
-    ransack (1.8.7)
+    ransack (1.8.8)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
