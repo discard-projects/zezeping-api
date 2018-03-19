@@ -9,5 +9,10 @@ namespace :samples do
       admin.password = 'zwt@zezeping'
       admin.confirmed_at = Time.now
     end
+
+    Admin.find_or_create_by(email: 'lily@zezeping.com') do |admin|
+      admin.password = 'lili@zezeping'
+      admin.confirmed_at = Time.now
+    end
   end
 end
