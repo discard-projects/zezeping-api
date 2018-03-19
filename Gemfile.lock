@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/wuyuedefeng/base-resource.git
-  revision: e4c85150287bbdc46c0fed08ae8f7ff856dcc022
+  revision: 4dbd452ccb940e1da1d4b708c0472a19ea4b602b
   specs:
     base_resource (0.1.3)
       kaminari

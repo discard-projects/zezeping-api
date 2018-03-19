@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   defaults format: :json do
-    mount_devise_token_auth_for 'User', at: 'auth'
-
-  mount_devise_token_auth_for 'Admin', at: 'auth_admin'
-  as :admin do
-    # Define routes for Admin within this block.
-  end
+    mount_devise_token_auth_for 'User', at: 'auth' , controllers: {
+      omniauth_callbacks: 'authentication_rails/omniauth_callbacks'
+    }
+    mount_devise_token_auth_for 'Admin', at: 'auth_admin'
     # api
     constraints subdomain: /\Aapi/ do
       scope module: 'api' do
