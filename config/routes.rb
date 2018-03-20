@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         resource :profile
         resources :stores, model_name: 'Store' do
           resources :comments
+          put :toggle_switch, on: :member
         end
         resources :regions do
           get :index_roots, on: :collection
