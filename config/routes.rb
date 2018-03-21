@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     # apa
     constraints subdomain: /\Aapa/ do
       scope module: 'admin' do
+        resources :users
         resource :profile
         resources :stores, model_name: 'Store' do
           resources :comments

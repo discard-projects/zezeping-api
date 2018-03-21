@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319235604) do
+ActiveRecord::Schema.define(version: 20180321141006) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -166,18 +166,17 @@ ActiveRecord::Schema.define(version: 20180319235604) do
     t.bigint "region_id"
     t.string "address"
     t.string "logo"
-    t.string "images"
     t.decimal "rank", precision: 2, scale: 1, default: "0.0"
     t.integer "per_expense", default: 0
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
-    t.time "opening_at"
-    t.time "closing_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_time_desc"
     t.datetime "suggested_at"
+    t.bigint "user_id"
     t.index ["region_id"], name: "index_stores_on_region_id"
+    t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -218,4 +217,5 @@ ActiveRecord::Schema.define(version: 20180319235604) do
   add_foreign_key "products", "stores"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
+  add_foreign_key "stores", "users"
 end

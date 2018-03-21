@@ -7,6 +7,7 @@ module StoreForm
     property :open_time_desc
     property :category_ids
     property :region_id
+    property :user_id
     property :address
     property :logo
     property :attachment_image_ids

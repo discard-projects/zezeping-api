@@ -7,6 +7,7 @@ module StoreForm
     property :open_time_desc
     property :category_ids
     property :region_id
+    property :user_id
     property :address
     property :logo
 
@@ -15,6 +16,6 @@ module StoreForm
     property :store_detail, populate_if_empty: StoreDetail, form: StoreDetailForm::Update
 
     validates :name, presence: true, length: { maximum: 40 }
-    validates :desc, presence: true, length: { maximum: 255 }
+    validates :desc, length: { maximum: 255 }
   end
 end
