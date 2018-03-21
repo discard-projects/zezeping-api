@@ -11,6 +11,7 @@ class Store < ApplicationRecord
   # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Association+callbacks
   has_and_belongs_to_many :categories, after_remove: Proc.new { |store, category| store.products.where(category: category).update_all(category_id: nil) }
   belongs_to :region, optional: true
+  belongs_to :user, optional: true
   has_many :products, dependent: :destroy
   has_many :comments, :as => :commentable
   has_many :attachment_images, as: :owner, dependent: :destroy
