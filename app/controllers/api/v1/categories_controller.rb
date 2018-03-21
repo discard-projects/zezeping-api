@@ -10,13 +10,13 @@ class Api::V1::CategoriesController < Api::V1::BaseController
       else # intelligent（智能）
         stores = stores.order(suggested_at: :desc, comments_count: :desc, updated_at: :desc)
     end
-    br_index stores
+    br_index stores.preload(:categories)
     render 'api/v1/stores/index'
   end
 
   private
 
   def loc
-    JSON.parse params[:loc]
+    JSON.parse params[:loc] rescue nil
   end
 end
