@@ -11,6 +11,7 @@ class Api::V1::CategoriesController < Api::V1::BaseController
         stores = stores.order(suggested_at: :desc, comments_count: :desc, updated_at: :desc)
     end
     br_index stores.preload(:categories)
+    @loc = loc
     render 'api/v1/stores/index'
   end
 
