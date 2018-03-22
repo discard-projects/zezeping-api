@@ -7,9 +7,9 @@ Time::DATE_FORMATS[:time_short] = '%H:%M'
 
 Time::DATE_FORMATS[:humane] = lambda do |date|
   now = Time.now
-  if now.strftime("%m-%d") == date.strftime("%m-%d")
+  if now.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
     "Today #{date.to_s(:time_short)}"
-  elsif now.yesterday.strftime("%m-%d") == date.strftime("%m-%d")
+  elsif now.yesterday.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
     "Yersterday #{date.to_s(:time_short)}"
   else
     date.strftime("%m-%d %H:%M")
