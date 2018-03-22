@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321141006) do
+ActiveRecord::Schema.define(version: 20180322104541) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20180321141006) do
     t.string "open_time_desc"
     t.datetime "suggested_at"
     t.bigint "user_id"
+    t.integer "moments_count", default: 0
     t.index ["region_id"], name: "index_stores_on_region_id"
     t.index ["user_id"], name: "index_stores_on_user_id"
   end

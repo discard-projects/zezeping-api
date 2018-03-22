@@ -13,6 +13,7 @@ class Store < ApplicationRecord
   belongs_to :region, optional: true
   belongs_to :user, optional: true
   has_many :products, dependent: :destroy
+  has_many :moments
   has_many :comments, :as => :commentable
   has_many :attachment_images, as: :owner, dependent: :destroy
   has_one :store_detail, dependent: :destroy
