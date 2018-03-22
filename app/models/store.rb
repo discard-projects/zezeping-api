@@ -9,9 +9,10 @@ class Store < ApplicationRecord
 
   # belongs_to :category, optional: true
   # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Association+callbacks
-  has_and_belongs_to_many :categories, after_remove: Proc.new { |store, category| store.products.where(category: category).update_all(category_id: nil) }
+  has_and_belongs_to_many :categories, after_remove: Proc.new { |store, category| store.product_categories.where(category: category).update_all(category_id: nil) }
   belongs_to :region, optional: true
   belongs_to :user, optional: true
+  has_many :product_categories, dependent: :destroy
   has_many :products, dependent: :destroy
   has_many :moments
   has_many :comments, :as => :commentable

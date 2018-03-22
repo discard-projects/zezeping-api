@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322104541) do
+ActiveRecord::Schema.define(version: 20180322160408) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -125,16 +125,27 @@ ActiveRecord::Schema.define(version: 20180322104541) do
     t.index ["store_id"], name: "index_moments_on_store_id"
   end
 
-  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "product_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "store_id"
     t.bigint "category_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["store_id"], name: "index_product_categories_on_store_id"
+  end
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "store_id"
     t.string "name"
     t.decimal "price", precision: 10, scale: 2, default: "0.0"
     t.string "dest"
     t.decimal "rank", precision: 2, scale: 1, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.bigint "product_category_id"
+    t.integer "comments_count", default: 0
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
@@ -214,7 +225,9 @@ ActiveRecord::Schema.define(version: 20180322104541) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "moments", "stores"
-  add_foreign_key "products", "categories"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "stores"
+  add_foreign_key "products", "product_categories"
   add_foreign_key "products", "stores"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
