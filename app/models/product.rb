@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   belongs_to :store
   belongs_to :product_category
   has_many :comments, :as => :commentable

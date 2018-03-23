@@ -8,7 +8,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # storage :file
   # storage :fog
 
-  # size of greater than or equal to 1 byte and less than or equal to 10 MB
+  # size of greater than or equal to 1 byte and less than or equal to 0.6 MB
   # 1..10.megabytes
   def size_range
     1..0.6.megabytes
@@ -43,7 +43,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [120, 120]
+    process resize_to_fit: [150, 150]
   end
 
   version :thumb2 do
@@ -51,11 +51,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :small do
-    process resize_to_fit: [500, 350]
-  end
-
-  version :middle do
-    process resize_to_fit: [1000, 750]
+    process resize_to_fit: [700, 500]
   end
 
   # version :large do
