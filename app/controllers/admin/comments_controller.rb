@@ -1,4 +1,4 @@
-class Admin::CommentsController < ApplicationController
+class Admin::CommentsController < Admin::BaseController
   before_action :set_commentable, only: [:create]
 
   def create

@@ -1,2 +1,2 @@
-class Admin::MomentsController < ApplicationController
+class Admin::MomentsController < Admin::BaseController
 end
