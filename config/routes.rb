@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           resource :profile, only: [:show, :update]
           resources :stores, only: [:index, :show], model_name: 'Store' do
             resources :comments, only: [:index, :create]
+            get :detail, on: :member
           end
           resources :attachment_images, only: [:create]
           resources :categories, only: [:show] do

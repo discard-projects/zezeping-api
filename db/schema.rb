@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323054148) do
+ActiveRecord::Schema.define(version: 20180324021336) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20180323054148) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "products_count", default: 0
     t.index ["category_id"], name: "index_product_categories_on_category_id"
     t.index ["store_id"], name: "index_product_categories_on_store_id"
   end
@@ -188,6 +189,7 @@ ActiveRecord::Schema.define(version: 20180323054148) do
     t.datetime "suggested_at"
     t.bigint "user_id"
     t.integer "moments_count", default: 0
+    t.integer "products_count", default: 0
     t.index ["region_id"], name: "index_stores_on_region_id"
     t.index ["user_id"], name: "index_stores_on_user_id"
   end

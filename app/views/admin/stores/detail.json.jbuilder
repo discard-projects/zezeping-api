@@ -1,3 +1,4 @@
+json.(@store, :id, :name, :open_time_desc, :desc, :category_ids, :attachment_image_ids, :region_id, :user_id, :address, :suggested_at, :lat, :lng, :created_at)
 json.categories @store.categories do |category|
   json.(category, :id, :name, :created_time, :updated_time)
 

@@ -6,4 +6,8 @@ class Api::V1::StoresController < Api::V1::BaseController
       stores.order(suggested_at: :desc)
     end
   end
+
+  def detail
+    show
+  end
 end

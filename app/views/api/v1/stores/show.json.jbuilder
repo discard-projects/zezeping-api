@@ -1,5 +1,5 @@
 json.item do
-  json.(@store, :id, :name, :open_time_desc, :desc, :comments_count, :moments_count, :per_expense, :address, :rank, :attachment_image_ids, :region_id, :created_at)
+  json.(@store, :id, :name, :open_time_desc, :desc, :comments_count, :moments_count, :products_count, :per_expense, :address, :rank, :attachment_image_ids, :region_id, :created_at)
   json.category_names @store.categories.pluck(:name)
   json.logo @store.logo.thumb
   json.store_detail do
