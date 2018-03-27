@@ -1,4 +1,7 @@
 class Store < ApplicationRecord
+  include Footprintable
+  has_footprint(except: [:updated_at, :created_at])
+
   geocoded_by :address, :latitude  => :lat, :longitude => :lng
   after_validation :geocode
 
@@ -16,10 +19,15 @@ class Store < ApplicationRecord
   has_many :products, dependent: :destroy
   has_many :moments
   has_many :comments, :as => :commentable
+  has_many :views, :as => :viewable
   has_many :attachment_images, as: :owner, dependent: :destroy
   has_one :store_detail, dependent: :destroy
 
   before_create :create_store_detail
+
+  def try_add_view
+    View.try_add_for_viewable self
+  end
 
   private
 

@@ -1,6 +1,6 @@
 class Api::V1::BaseController < ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?
-  around_action :encrypt_data, :set_thread_footprint_actor
+  around_action :encrypt_data, :set_thread_footprint_actor, :set_thread_current_user
 
   private
 
@@ -10,6 +10,15 @@ class Api::V1::BaseController < ApplicationController
   ensure
     # to address the thread variable leak issues in Puma/Thin webserver
     Footprintable::Current.actor = nil
+  end
+
+  def set_thread_current_user
+    Current.user = current_user
+    Current.remote_ip = request.remote_ip
+    yield
+  ensure
+    # to address the thread variable leak issues in Puma/Thin webserver
+    Current.user = nil
   end
 
   def encrypt_data

@@ -7,6 +7,12 @@ class Api::V1::StoresController < Api::V1::BaseController
     end
   end
 
+  def show
+    super do |store|
+      store.try_add_view
+    end
+  end
+
   def detail
     show
   end

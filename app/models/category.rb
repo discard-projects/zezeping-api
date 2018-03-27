@@ -1,4 +1,7 @@
 class Category < ApplicationRecord
+  include Footprintable
+  has_footprint(except: [:updated_at, :created_at])
+
   mount_uploader :logo, ImageUploader
   has_ancestry
   acts_as_list scope: [:ancestry]

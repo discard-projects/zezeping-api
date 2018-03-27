@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include Footprintable
+  has_footprint(except: [:updated_at, :created_at, :tokens])
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,

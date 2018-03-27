@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324021336) do
+ActiveRecord::Schema.define(version: 20180327080540) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20180324021336) do
     t.bigint "user_id"
     t.integer "moments_count", default: 0
     t.integer "products_count", default: 0
+    t.integer "views_count", default: 0
     t.index ["region_id"], name: "index_stores_on_region_id"
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
@@ -224,6 +225,17 @@ ActiveRecord::Schema.define(version: 20180324021336) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  end
+
+  create_table "views", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "viewable_type"
+    t.bigint "viewable_id"
+    t.integer "user_id"
+    t.string "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip"], name: "index_views_on_ip"
+    t.index ["viewable_type", "viewable_id"], name: "index_views_on_viewable_type_and_viewable_id"
   end
 
   add_foreign_key "comments", "users"

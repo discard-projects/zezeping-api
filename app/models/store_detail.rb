@@ -1,4 +1,7 @@
 class StoreDetail < ApplicationRecord
+  include Footprintable
+  has_footprint(except: [:updated_at, :created_at])
+
   mount_uploader :wechat_qrcode, ImageUploader
 
   after_initialize :initialize_defaults, :if => :new_record?
