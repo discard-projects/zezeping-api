@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327080540) do
+ActiveRecord::Schema.define(version: 20180328022654) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20180327080540) do
     t.integer "moments_count", default: 0
     t.integer "products_count", default: 0
     t.integer "views_count", default: 0
+    t.integer "votes_count", default: 0
     t.index ["region_id"], name: "index_stores_on_region_id"
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
@@ -238,6 +239,16 @@ ActiveRecord::Schema.define(version: 20180327080540) do
     t.index ["viewable_type", "viewable_id"], name: "index_views_on_viewable_type_and_viewable_id"
   end
 
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "user_id"
+    t.string "voteable_type"
+    t.bigint "voteable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
+  end
+
   add_foreign_key "comments", "users"
   add_foreign_key "moments", "stores"
   add_foreign_key "product_categories", "categories"
@@ -247,4 +258,5 @@ ActiveRecord::Schema.define(version: 20180327080540) do
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
   add_foreign_key "stores", "users"
+  add_foreign_key "votes", "users"
 end

@@ -20,6 +20,7 @@ class Store < ApplicationRecord
   has_many :moments
   has_many :comments, :as => :commentable
   has_many :views, :as => :viewable
+  has_many :votes, :as => :voteable
   has_many :attachment_images, as: :owner, dependent: :destroy
   has_one :store_detail, dependent: :destroy
 
