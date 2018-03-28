@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328022654) do
+ActiveRecord::Schema.define(version: 20180328032455) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -101,6 +101,14 @@ ActiveRecord::Schema.define(version: 20180328022654) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "discussions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "desc"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_discussions_on_user_id"
+  end
+
   create_table "footprints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.text "before"
     t.text "after"
@@ -122,6 +130,8 @@ ActiveRecord::Schema.define(version: 20180328022654) do
     t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "views_count", default: 0
+    t.integer "votes_count", default: 0
     t.index ["store_id"], name: "index_moments_on_store_id"
   end
 
@@ -196,6 +206,17 @@ ActiveRecord::Schema.define(version: 20180328022654) do
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
+  create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "title"
+    t.string "desc"
+    t.bigint "user_id"
+    t.integer "votes_count", default: 0
+    t.integer "views_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subjects_on_user_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -250,6 +271,7 @@ ActiveRecord::Schema.define(version: 20180328022654) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "discussions", "users"
   add_foreign_key "moments", "stores"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "stores"
@@ -258,5 +280,6 @@ ActiveRecord::Schema.define(version: 20180328022654) do
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
   add_foreign_key "stores", "users"
+  add_foreign_key "subjects", "users"
   add_foreign_key "votes", "users"
 end
