@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328032455) do
+ActiveRecord::Schema.define(version: 20180328032600) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -102,10 +102,14 @@ ActiveRecord::Schema.define(version: 20180328032455) do
   end
 
   create_table "discussions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string "desc"
     t.bigint "user_id"
+    t.string "discussable_type"
+    t.bigint "discussable_id"
+    t.string "content"
+    t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["discussable_type", "discussable_id"], name: "index_discussions_on_discussable_type_and_discussable_id"
     t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
@@ -208,8 +212,10 @@ ActiveRecord::Schema.define(version: 20180328032455) do
 
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "title"
-    t.string "desc"
+    t.string "content"
+    t.boolean "enabled", default: false
     t.bigint "user_id"
+    t.integer "discussions_count", default: 0
     t.integer "votes_count", default: 0
     t.integer "views_count", default: 0
     t.datetime "created_at", null: false

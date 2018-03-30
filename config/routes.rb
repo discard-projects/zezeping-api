@@ -22,6 +22,9 @@ Rails.application.routes.draw do
             get :stores, on: :member
           end
           resources :moments, only: [:index, :create]
+          resources :subjects, only: [:index, :create], model_name: 'Subject' do
+            resources :discussions, only: [:create]
+          end
         end
       end
     end
