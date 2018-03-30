@@ -25,7 +25,7 @@ class Api::V1::BaseController < ApplicationController
     yield
   ensure
     if response.status < 400 && response.status >= 200
-      # response.body = ResponseEncryption::encrypt(response.body)
+      response.body = ResponseEncryption::encrypt(response.body)
     end
   end
 end
