@@ -29,6 +29,7 @@ gem 'devise', '~> 4.4'
 gem 'devise_token_auth'
 # facebook part auth
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem 'timequery', github: 'wuyuedefeng/timequery'
 gem 'footprintable', github: 'wuyuedefeng/footprintable'
