@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328032600) do
+ActiveRecord::Schema.define(version: 20180401103753) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20180328032600) do
     t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "votes_count", default: 0
     t.index ["discussable_type", "discussable_id"], name: "index_discussions_on_discussable_type_and_discussable_id"
     t.index ["user_id"], name: "index_discussions_on_user_id"
   end

@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def sec_email
     email.gsub(/(\A.{2})(.*)(@.*\z)/){"#{$1}***#{$3}"}
   end
+
+  def id_hash
+    Digest::SHA1.hexdigest("#{self.id}")
+  end
 end

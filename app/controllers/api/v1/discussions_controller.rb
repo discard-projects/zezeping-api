@@ -1,11 +1,19 @@
 class Api::V1::DiscussionsController < Api::V1::BaseController
-  before_action :set_discussable, only: [:create]
+  before_action :set_discussable, only: [:create, :toggle_approve]
 
   def create
     params['user_id'] = current_user.id
     params['discussable'] = @discussable
     params['enabled'] = true
     super
+  end
+
+  def toggle_approve
+    discussion = @discussable.discussions.find(params[:id])
+    vote = discussion.votes.find_or_initialize_by(user: current_user, voteable: discussion)
+    is_persisted = vote.persisted?
+    is_persisted ? vote.destroy : vote.save
+    render json: {is_approved: !is_persisted, votes_count: discussion.reload.votes_count}, status: 200
   end
 
   private

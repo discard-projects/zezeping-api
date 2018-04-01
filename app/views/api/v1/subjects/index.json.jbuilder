@@ -12,10 +12,11 @@ json.items @subjects do |subject|
     json.(attachment_image, :file)
   end
 
-  json.discussions subject.discussions do |discussion|
+  json.discussions subject.discussions.order(votes_count: :desc, id: :desc) do |discussion|
     json.user do
-      json.(discussion.user, :nickname, :image)
+      json.(discussion.user, :nickname, :image, :id_hash)
     end
-    json.(discussion, :content)
+    json.(discussion, :id, :content, :is_approved, :votes_count)
+    json.subject_id subject.id
   end
 end

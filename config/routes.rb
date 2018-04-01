@@ -23,7 +23,9 @@ Rails.application.routes.draw do
           end
           resources :moments, only: [:index, :create]
           resources :subjects, only: [:index, :create], model_name: 'Subject' do
-            resources :discussions, only: [:create]
+            resources :discussions, only: [:create] do
+              put :toggle_approve, on: :member
+            end
           end
         end
       end
