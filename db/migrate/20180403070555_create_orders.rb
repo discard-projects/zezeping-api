@@ -2,7 +2,7 @@ class CreateOrders < ActiveRecord::Migration[5.1]
   def change
     create_table :orders do |t|
       t.string :oid
-      t.integer :products_count, default: 0
+      t.integer :order_products_count, default: 0
       # 总金额 100
       t.decimal :amount, precision: 10, scale: 2, default: 0
       # 调整金额 -1
