@@ -27,6 +27,12 @@ Rails.application.routes.draw do
               put :toggle_approve, on: :member
             end
           end
+          resources :posts, only: [:index, :show, :create, :update], model_name: 'Post' do
+            resources :discussions, only: [:create] do
+              put :toggle_approve, on: :member
+            end
+            put :toggle_approve, :toggle_collect, on: :member
+          end
         end
       end
     end

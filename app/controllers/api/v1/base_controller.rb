@@ -2,6 +2,13 @@ class Api::V1::BaseController < ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?
   around_action :encrypt_data, :set_thread_footprint_actor, :set_thread_current_user
 
+  def auth_owner model = nil
+    model || br_show do |item|
+      model = item
+    end
+    render json: {msg: 'permission denied'}, status: 422 and return if model.user != @current_user
+  end
+
   private
 
   def set_thread_footprint_actor

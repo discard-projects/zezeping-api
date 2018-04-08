@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403101927) do
+ActiveRecord::Schema.define(version: 20180408104941) do
+
+  create_table "adjustments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "source_type"
+    t.bigint "source_id"
+    t.string "adjustable_type"
+    t.bigint "adjustable_id"
+    t.bigint "order_id"
+    t.decimal "amount", precision: 10, scale: 2
+    t.string "label"
+    t.boolean "eligible"
+    t.boolean "included"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id"
+    t.index ["order_id"], name: "index_adjustments_on_order_id"
+    t.index ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id"
+  end
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "provider", default: "email", null: false
@@ -63,6 +80,16 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "calculators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "type"
+    t.string "calculable_type"
+    t.bigint "calculable_id"
+    t.text "preferences"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calculable_type", "calculable_id"], name: "index_calculators_on_calculable_type_and_calculable_id"
+  end
+
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -82,6 +109,16 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.index ["store_id"], name: "index_categories_stores_on_store_id"
   end
 
+  create_table "collections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "user_id"
+    t.string "collectable_type"
+    t.bigint "collectable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collectable_type", "collectable_id"], name: "index_collections_on_collectable_type_and_collectable_id"
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "user_id"
     t.string "content"
@@ -99,6 +136,16 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.string "tmp_avatar"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "coupons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "user_id"
+    t.bigint "promotion_id"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_id"], name: "index_coupons_on_promotion_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "discussions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -146,30 +193,57 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.integer "quantity", default: 0
     t.decimal "price", precision: 10, scale: 2, default: "0.0"
     t.decimal "adjustment_price", precision: 10, scale: 2, default: "0.0"
-    t.decimal "additional_tax_aprice", precision: 10, scale: 2, default: "0.0"
-    t.decimal "promo_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "additional_tax_price", precision: 10, scale: 2, default: "0.0"
     t.decimal "payment_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "promo_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "real_payment_price", precision: 10, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
+  create_table "order_promotions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "order_id"
+    t.bigint "promotion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_promotions_on_order_id"
+    t.index ["promotion_id"], name: "index_order_promotions_on_promotion_id"
+  end
+
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "oid"
+    t.bigint "user_id"
+    t.bigint "store_id"
+    t.integer "status", limit: 1, default: 0
     t.integer "order_products_count", default: 0
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "adjustment_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "shipment_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "additional_tax_amount", precision: 10, scale: 2, default: "0.0"
-    t.decimal "promo_amount", precision: 10, scale: 2, default: "0.0"
     t.decimal "payment_amount", precision: 10, scale: 2, default: "0.0"
-    t.string "status"
-    t.bigint "user_id"
+    t.decimal "promo_amount", precision: 10, scale: 2, default: "0.0"
+    t.decimal "real_payment_amount", precision: 10, scale: 2, default: "0.0"
     t.string "special_instruction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.text "content"
+    t.boolean "enabled", default: false
+    t.integer "discussions_count", default: 0
+    t.integer "votes_count", default: 0
+    t.integer "views_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "collections_count", default: 0
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "product_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -194,8 +268,62 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.bigint "product_category_id"
     t.integer "comments_count", default: 0
     t.string "image"
+    t.decimal "adjustment_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "additional_tax_price", precision: 10, scale: 2, default: "0.0"
+    t.decimal "payment_price", precision: 10, scale: 2, default: "0.0"
+    t.boolean "support_promotion", default: false
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
     t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
+  create_table "promotion_actions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "promotion_id"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_id"], name: "index_promotion_actions_on_promotion_id"
+  end
+
+  create_table "promotion_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "promotion_rule_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "product_id"
+    t.bigint "promotion_rule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_promotion_rule_products_on_product_id"
+    t.index ["promotion_rule_id"], name: "index_promotion_rule_products_on_promotion_rule_id"
+  end
+
+  create_table "promotion_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "promotion_id"
+    t.string "type"
+    t.text "preferences"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_id"], name: "index_promotion_rules_on_promotion_id"
+  end
+
+  create_table "promotions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "store_id"
+    t.bigint "promotion_category_id"
+    t.string "name"
+    t.string "desc"
+    t.datetime "start_at"
+    t.datetime "expire_at"
+    t.string "code"
+    t.integer "usage_limit"
+    t.string "match_policy"
+    t.boolean "advertise", default: false
+    t.integer "category", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_category_id"], name: "index_promotions_on_promotion_category_id"
+    t.index ["store_id"], name: "index_promotions_on_store_id"
   end
 
   create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -309,16 +437,30 @@ ActiveRecord::Schema.define(version: 20180403101927) do
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
+  add_foreign_key "adjustments", "orders"
+  add_foreign_key "collections", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "coupons", "promotions"
+  add_foreign_key "coupons", "users"
   add_foreign_key "discussions", "users"
   add_foreign_key "moments", "stores"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
+  add_foreign_key "order_promotions", "orders"
+  add_foreign_key "order_promotions", "promotions"
+  add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
+  add_foreign_key "posts", "users"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "stores"
   add_foreign_key "products", "product_categories"
   add_foreign_key "products", "stores"
+  add_foreign_key "promotion_actions", "promotions"
+  add_foreign_key "promotion_rule_products", "products"
+  add_foreign_key "promotion_rule_products", "promotion_rules"
+  add_foreign_key "promotion_rules", "promotions"
+  add_foreign_key "promotions", "promotion_categories"
+  add_foreign_key "promotions", "stores"
   add_foreign_key "store_details", "stores"
   add_foreign_key "stores", "regions"
   add_foreign_key "stores", "users"

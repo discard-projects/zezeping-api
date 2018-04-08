@@ -9,6 +9,7 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_one :store
+  has_many :posts
 
   def sec_email
     email.gsub(/(\A.{2})(.*)(@.*\z)/){"#{$1}***#{$3}"}
