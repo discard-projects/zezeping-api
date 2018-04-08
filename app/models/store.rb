@@ -26,10 +26,6 @@ class Store < ApplicationRecord
 
   before_create :create_store_detail
 
-  def try_add_view
-    View.try_add_for_viewable self
-  end
-
   private
 
   def create_store_detail

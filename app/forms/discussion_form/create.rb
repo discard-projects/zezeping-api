@@ -5,7 +5,7 @@ module DiscussionForm
     property :discussable
     property :user_id
     property :content
-    property :enabled
+    property :enabled, default: true
 
     validates :discussable, presence: true
     validates :content, presence: true, length: { maximum: 255 }

@@ -5,7 +5,7 @@ class View < ApplicationRecord
   validates :ip, presence: true
 
   #  class method
-  def self.try_add_for_viewable viewable
+  def self.try_add_viewable viewable
     viewable.views.day_range_column(:created_at).find_or_create_by(ip: Current.remote_ip) do |view|
       view.user = Current.user
     end

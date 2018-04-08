@@ -9,7 +9,7 @@ class Api::V1::StoresController < Api::V1::BaseController
 
   def show
     super do |store|
-      store.try_add_view
+      View.try_add_viewable store
     end
   end
 

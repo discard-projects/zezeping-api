@@ -4,7 +4,6 @@ class Api::V1::DiscussionsController < Api::V1::BaseController
   def create
     params['user_id'] = current_user.id
     params['discussable'] = @discussable
-    params['enabled'] = true
     super
   end
 
