@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408104941) do
+ActiveRecord::Schema.define(version: 20180409090431) do
 
   create_table "adjustments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "source_type"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20180408104941) do
     t.boolean "enabled", default: true
     t.integer "position"
     t.string "logo"
+    t.integer "category", limit: 1, default: 0
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
@@ -243,6 +244,8 @@ ActiveRecord::Schema.define(version: 20180408104941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "collections_count", default: 0
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -450,6 +453,7 @@ ActiveRecord::Schema.define(version: 20180408104941) do
   add_foreign_key "order_promotions", "promotions"
   add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "stores"

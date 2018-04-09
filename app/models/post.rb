@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :category
   has_many :discussions, -> { order 'created_at asc' }, :as => :discussable
   has_many :views, :as => :viewable
   has_many :votes, :as => :voteable

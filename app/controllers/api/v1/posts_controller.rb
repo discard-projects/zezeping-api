@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::BaseController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :auth_owner, only: [:update]
   def create
     params['user_id'] = current_user.id

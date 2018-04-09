@@ -1,0 +1,1 @@
+json.items @categories, partial: 'partial/categories/tree_item', as: :object

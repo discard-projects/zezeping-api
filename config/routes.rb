@@ -20,6 +20,7 @@ Rails.application.routes.draw do
           resources :attachment_images, only: [:create]
           resources :categories, only: [:show] do
             get :stores, on: :member
+            get :index_tree, on: :collection
           end
           resources :moments, only: [:index, :create]
           resources :subjects, only: [:index, :create], model_name: 'Subject' do

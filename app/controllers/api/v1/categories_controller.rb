@@ -1,5 +1,10 @@
 class Api::V1::CategoriesController < Api::V1::BaseController
   skip_before_action :authenticate_user!, only: [:show, :stores]
+
+  def index_tree
+    br_index Category.roots
+  end
+
   def stores
     stores =  Category.find_by(id: params[:id]).subtree_stores
     case params[:sort_type]
