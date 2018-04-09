@@ -20,4 +20,8 @@ class Category < ApplicationRecord
   def subtree_stores
     Store.joins(:categories).merge(subtree)
   end
+
+  def category_parents_names
+    self.ancestors.pluck(:name).push(self.name).join('/')
+  end
 end
