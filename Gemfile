@@ -51,7 +51,8 @@ gem 'carrierwave-aliyun'
 gem 'mini_magick'
 # 限流等
 gem 'rack-attack'
-
+# AASM is a continuation of the acts-as-state-machine rails plugin, built for plain Ruby objects
+gem 'aasm'
 # geocoder
 gem 'geocoder'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409090431) do
+ActiveRecord::Schema.define(version: 20180411021202) do
 
   create_table "adjustments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "source_type"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20180409090431) do
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0
     t.integer "votes_count", default: 0
+    t.integer "status", limit: 1, default: 0
     t.index ["store_id"], name: "index_moments_on_store_id"
   end
 
@@ -245,6 +246,7 @@ ActiveRecord::Schema.define(version: 20180409090431) do
     t.datetime "updated_at", null: false
     t.integer "collections_count", default: 0
     t.bigint "category_id"
+    t.integer "status", limit: 1, default: 0
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

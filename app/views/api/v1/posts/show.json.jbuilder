@@ -1,5 +1,5 @@
 json.item do
-  json.(@post, :id, :title, :user_id, :category_id, :content, :views_count, :votes_count, :is_approved, :discussions_count, :collections_count, :is_collected)
+  json.(@post, :id, :title, :user_id, :category_id, :content, :status, :views_count, :votes_count, :is_approved, :discussions_count, :collections_count, :is_collected)
   json.created_time_humane @post.created_at.to_s(:humane)
   json.category_name @post.category.try(:name)
   json.discussions @post.discussions.order(votes_count: :desc) do |discussion|
