@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  include AASM
   belongs_to :user
   belongs_to :category
   has_many :discussions, -> { order 'created_at asc' }, :as => :discussable

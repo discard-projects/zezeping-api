@@ -16,7 +16,7 @@ json.items @subjects do |subject|
     json.user do
       json.(discussion.user, :nickname, :image, :id_hash)
     end
-    json.(discussion, :id, :content, :is_approved, :votes_count)
+    json.(discussion, :id, :content, :discussable_id, :is_approved, :votes_count)
     json.subject_id subject.id
   end
 end
