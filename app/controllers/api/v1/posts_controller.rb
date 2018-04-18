@@ -24,7 +24,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def toggle_approve
     br_show do |post|
-      vote = post.votes.find_or_initialize_by(user: current_user, voteable: post)
+      vote = post.votes.find_or_initialize_by(user: current_user)
       is_persisted = vote.persisted?
       is_persisted ? vote.destroy : vote.save
       render json: {is_approved: !is_persisted, votes_count: post.reload.votes_count}, status: 200

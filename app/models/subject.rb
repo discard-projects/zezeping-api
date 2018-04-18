@@ -4,4 +4,8 @@ class Subject < ApplicationRecord
   has_many :views, :as => :viewable
   has_many :votes, :as => :voteable
   has_many :attachment_images, as: :owner, dependent: :destroy
+
+  def is_approved
+    votes.exists?(user: Current.user)
+  end
 end

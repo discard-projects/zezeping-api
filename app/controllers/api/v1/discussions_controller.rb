@@ -1,5 +1,12 @@
 class Api::V1::DiscussionsController < Api::V1::BaseController
-  before_action :set_discussable, only: [:create, :toggle_approve]
+  skip_before_action :authenticate_user!, only: [:index]
+  before_action :set_discussable, only: [:index, :create, :toggle_approve]
+
+  def index
+    super @discussable.discussions do |discussions|
+      discussions.order(:id)
+    end
+  end
 
   def create
     params['user_id'] = current_user.id

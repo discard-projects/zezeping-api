@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411021202) do
+ActiveRecord::Schema.define(version: 20180418093944) do
 
   create_table "adjustments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "source_type"
@@ -179,13 +179,13 @@ ActiveRecord::Schema.define(version: 20180411021202) do
   create_table "moments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "store_id"
     t.string "content"
-    t.integer "comments_count", default: 0
     t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0
     t.integer "votes_count", default: 0
     t.integer "status", limit: 1, default: 0
+    t.integer "discussions_count", default: 0
     t.index ["store_id"], name: "index_moments_on_store_id"
   end
 

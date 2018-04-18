@@ -1,7 +1,7 @@
 class Moment < ApplicationRecord
   include AASM
   belongs_to :store, counter_cache: true
-  has_many :comments, :as => :commentable
+  has_many :discussions, :as => :discussable
   has_many :views, :as => :viewable
   has_many :votes, :as => :voteable
   has_many :attachment_images, as: :owner, dependent: :destroy
@@ -19,5 +19,9 @@ class Moment < ApplicationRecord
     event :status_blocked do
       transitions :from => [:status_created, :status_expired], :to => :status_blocked
     end
+  end
+
+  def is_approved
+    votes.exists?(user: Current.user)
   end
 end
