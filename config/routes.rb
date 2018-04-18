@@ -22,7 +22,7 @@ Rails.application.routes.draw do
             get :stores, on: :member
             get :index_tree, on: :collection
           end
-          resources :moments, only: [:index, :create]
+          resources :moments, only: [:index, :create, :show]
           resources :subjects, only: [:index, :create], model_name: 'Subject' do
             resources :discussions, only: [:create] do
               put :toggle_approve, on: :member

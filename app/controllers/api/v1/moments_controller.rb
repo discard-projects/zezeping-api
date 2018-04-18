@@ -9,4 +9,10 @@ class Api::V1::MomentsController < Api::V1::BaseController
     params['enabled'] = true
     super
   end
+
+  def show
+    super do |moment|
+      View.try_add_viewable moment
+    end
+  end
 end
